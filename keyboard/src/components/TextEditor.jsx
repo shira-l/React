@@ -1,15 +1,17 @@
 import Keyboard_Button from './keyboard_botton'
 import Button_Options from './button_Options'
 import Text from './text'
-import {useState} from 'react'
+import { useState } from 'react'
 
-class Letter{ 
-    constructor(letter, color,fontSize){
-    this.letter = letter;
-    this.style = {
-        color : color,
-        fontSize :fontSize
-    }}
+class Letter {
+    constructor(letter, color, size,font) {
+        this.letter = letter;
+        this.style = {
+            color: color,
+            fontSize: size,
+            fontFamily:font
+        }
+    }
 }
 
 
@@ -17,31 +19,21 @@ const TextEditor = (props) => {
 
     const [language, setlanguage] = useState('english');
     const [color, setColor] = useState('black');
-    const [fontSize, setFontSize] = useState('16px')
-    const [sentence, setSentence] = useState([new Letter('',color,fontSize)]);
-   const [performence,setPerformence]=useState([]);
-   console.log(performence);
+    const [size, setSize] = useState('16px')
+    const [font, setFont] = useState('inherit')
+    const [sentence, setSentence] = useState([new Letter('', color, size,font)]);
+    const [performence, setPerformence] = useState([]);
+    const setters = [setlanguage, setColor, setSize, setFont]
 
     const setLetter = (letter) => {
-        setSentence(prevSentence=> [...prevSentence,new Letter(letter,color,fontSize) ]);
+        setSentence(prevSentence => [...prevSentence, new Letter(letter, color, size,font)]);
     }
-     setlanguage = (language) => {
-        setPerformence(prevPerformence=>[,...prevPerformence])
-        setSentence(prevSentence=> [...prevSentence,new Letter(letter,color,fontSize) ]);
-    }
-    const Delete=()=>setSentence(sentence.pop());
-    // const setLetter = (letter) => {
-    //     setSentence(prevSentence=> [...prevSentence,new Letter(letter,color,fontSize) ]);
-    // }
-    // const setLetter = (letter) => {
-    //     setSentence(prevSentence=> [...prevSentence,new Letter(letter,color,fontSize) ]);
-    // }
-   
+    const Delete = () => setSentence(sentence.slice(0, -1));
     return (
         <>
-            <Text sentence={sentence} setPerformence={setPerformence}/>
+            <Text sentence={sentence} setPerformence={setPerformence} />
             <Keyboard_Button language={language} setLetter={setLetter} Delete={Delete} />
-            <Button_Options setlanguage={setlanguage} language={language}setPerformence={setPerformence} />
+            <Button_Options setters={setters} language={language} setPerformence={setPerformence} />
         </>
     )
 

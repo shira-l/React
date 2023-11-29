@@ -24,16 +24,19 @@ function Keyboard_Button(props) {
         switch (name) {
             case 'SPACE':
                 props.setLetter(" ");
+                break
             case 'DELETE':
                 props.Delete();
-case 'ENTER':
-
+                break
+            case 'ENTER':
+                props.setLetter("\n");
+                break
         }
     }
 
     return (
         <>
-            <div key={Keyboard}>
+            <div>
                 {
                     getKeyboard().map((letterN) => (
                         <>
