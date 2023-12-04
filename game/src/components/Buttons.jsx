@@ -4,26 +4,26 @@ function Buttons(props) {
         let number;
         switch (action) {
             case '+1':
-                number=props.player.number+1;
+                number = props.player.number + 1;
                 break;
             case '-1':
-                number=props.player.number-1;
+                number = props.player.number - 1;
                 break;
             case '*2':
-                number=props.player.number*2;
+                number = props.player.number * 2;
                 break;
             default:
-                number=props.player.number/2;
+                number = props.player.number / 2;
                 break;
         }
-        props.setPlayer(props.player.index,number);
+        props.upDatePlayer(number);
     }
-    return(
+    return (
         <>
-         <p>Number: {props.player.number}<br/>Steps: {props.player.steps}</p>
-       { buttons.map(action => <button onClick={()=>{buttons_func(action)}}>{action}</button>)}
+            <p>Number: {props.player.number}<br />Steps: {props.player.steps}</p>
+            {buttons.map(action => <button onClick={() => { buttons_func(action) }} disabled={props.disabled}>{action}</button>)}
         </>
     )
-    
+
 }
 export default Buttons
