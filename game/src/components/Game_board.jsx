@@ -27,8 +27,6 @@ function Game_board() {
     const [start, setStart] = useState(false)
     const[Iplayer,setIPlayer]=useState(0);
     const upDatePlayer = (number) => {
-        debugger
-        
         let newPlayers = players.map((Player,i) => {
             if (i==Iplayer) { Player.number = number ;Player.steps++;}
             return Player

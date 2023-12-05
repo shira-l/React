@@ -13,7 +13,7 @@ function Buttons(props) {
                 number = props.player.number * 2;
                 break;
             default:
-                number = props.player.number / 2;
+                number = Math.floor(props.player.number / 2);
                 break;
         }
         props.upDatePlayer(number);
