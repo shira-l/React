@@ -20,7 +20,6 @@ function Buttons(props) {
     }
     return (
         <>
-            <p>Number: {props.player.number}<br />Steps: {props.player.steps}</p>
             {buttons.map(action => <button onClick={() => { buttons_func(action) }} disabled={props.disabled}>{action}</button>)}
         </>
     )
