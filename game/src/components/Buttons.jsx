@@ -27,6 +27,7 @@ function Buttons(props) {
                 break;
             case 'Quit':
                 props.Quit();
+                
                 break;
         }
 

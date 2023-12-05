@@ -54,6 +54,9 @@ function Game_board() {
 
     const Quit = () => {
         setPlayers(players.splice(Iplayer, 1))
+        if(players.length===0) {
+            setBdisplay(true);
+        }
     }
 
     return (
