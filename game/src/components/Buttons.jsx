@@ -8,29 +8,24 @@ function Buttons(props) {
         switch (action) {
             case '+1':
                 number = props.player.number + 1;
-                props.upDatePlayer(number);
                 break;
             case '-1':
                 number = props.player.number - 1;
-                props.upDatePlayer(number);
                 break;
             case '*2':
                 number = props.player.number * 2;
-                props.upDatePlayer(number);
                 break;
             case '/2':
                 number = Math.floor(props.player.number / 2);
-                props.upDatePlayer(number);
                 break;
             case 'New Game':
                 props.new_Game()
                 break;
             case 'Quit':
                 props.Quit();
-                
                 break;
         }
-
+        if (number!=null) { props.upDatePlayer(number); }
     }
     return (
         <>

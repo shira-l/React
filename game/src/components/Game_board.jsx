@@ -47,15 +47,17 @@ function Game_board() {
             }
             return Player
         })
-        setPlayers[newPlayers];
         setIPlayer((Iplayer + 1) % (players.length))
+        setPlayers[newPlayers]; 
     }
 
 
     const Quit = () => {
-        setPlayers(players.splice(Iplayer, 1))
+       players.splice(Iplayer, 1)
+        setPlayers(players)
         if(players.length===0) {
             setBdisplay(true);
+            setIPlayer(-1)
         }
     }
 
@@ -63,9 +65,9 @@ function Game_board() {
         <>
             {Bdisplay ? <button onClick={() => Add_Player()}>Add Gamer</button> : false}
             {Bdisplay ? <button onClick={() => { setIPlayer(0); setBdisplay(false) }}>Start Game</button> : false}
-            {start ? players.map((player, index) => (<Player_board key={index} player={player} upDatePlayers={upDatePlayers} disabled={index != Iplayer} Quit={Quit} />)) : null}
+          {start ? players.map((player, index) => {return <Player_board key={index} player={player} upDatePlayers={upDatePlayers} disabled={index != Iplayer} Quit={Quit}/>}) : null}
 
-        </>
+        </> 
     )
 }
 export default Game_board
