@@ -7,7 +7,6 @@ function Style_Select(props) {
     const onOptionChangeHandler = (event, index) => {
         props.setters[3](prevPerformence=>[...prevPerformence,()=>{event.target.value=props.style[index];
             props.setters[index](props.style[index])}])
-            console.log(event.target)
         switch (index) {
             case 0:
 

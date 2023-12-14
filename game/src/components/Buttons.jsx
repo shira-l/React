@@ -25,7 +25,7 @@ function Buttons(props) {
                 props.Quit();
                 break;
         }
-        if (number!=null) { props.upDatePlayer(number); }
+        if (number!=null) { props.updatePlayer(number); }
     }
     return (
         <>
