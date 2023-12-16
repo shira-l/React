@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Player_board from './Player_board'
 import Log_In from './Log_In';
+import '../App.css'
 
 function Game_board() {
     const [players, setPlayers] = useState([])
     const [Bdisplay, setBdisplay] = useState(true)
     const [Iplayer, setIPlayer] = useState(0);
     const [leadingPlayers, setLeadingPlayers] = useState([])
+
 
     const updatePlayers = (update_player) => {
         let newPlayers = players.map((Player) => {
@@ -22,6 +24,7 @@ function Game_board() {
         setPlayers(newPlayers);
     }
 
+
     const update_storage = (player) => {
         let users = JSON.parse(localStorage.getItem("users"));
         for (let user of users) {
@@ -35,18 +38,29 @@ function Game_board() {
             if (user1.average > user2.average) return 1;
             return 0;
         });
+        debugger
         localStorage.setItem('users', JSON.stringify(users))
-        leading_update(users)
+        leading_update()
     }
 
-    const leading_update = (users) => {
-        let leading_Players = users.splice(0, 3)
+
+    const leading_update = () => {
+        debugger
+        let users = JSON.parse(localStorage.getItem("users"));
+        let leading_Players = []
+        for (let i = 0; i < Math.min(users.length, 3); i++) {
+            if (users[i].average == 1000) {
+                break
+            }
+            leading_Players.push(users[i])
+        }
         setLeadingPlayers(leading_Players)
     }
-    const Quit = () => {
 
+
+    const Quit = () => {
+        debugger
         let Quit_player = players[Iplayer]
-        update_storage(Quit_player)
         let update_players = players.filter(player => player.email !== Quit_player.email)
         setPlayers(update_players)
         setIPlayer((Iplayer) % (players.length - 1))
@@ -54,18 +68,20 @@ function Game_board() {
     }
 
 
-    const start_game = (users) => {
+    const start_game = () => {
+        debugger
         setIPlayer(0)
         setBdisplay(false)
-        leading_update(users)
+        leading_update()
     }
 
 
     return (
         <>
+
             {Bdisplay ? <Log_In players={players} setPlayers={setPlayers} start_game={start_game} />
-            : players.map((player, index) => { return <Player_board key={index} player={player} updatePlayers={updatePlayers} disabled={index != Iplayer} Quit={Quit} /> })}
-             {!Bdisplay ?<p>The leading gamers: {leadingPlayers.map(player=>`${player.name}: ${player.average} `)}</p>:null}
+                : <div id='board'> {players.map((player, index) => { return <Player_board key={index} player={player} updatePlayers={updatePlayers} disabled={index != Iplayer} Quit={Quit} /> })}</div>}
+            {!Bdisplay ? <p>The leading gamers: {leadingPlayers.map(player => `${player.name}: ${player.average} `)}</p> : null}
         </>
     )
 }

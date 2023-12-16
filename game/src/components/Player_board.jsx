@@ -3,9 +3,9 @@ import Buttons from './Buttons'
 
 
 function Player_board(props) {
+    let m_player = props.player;
 
-
-    const [player, setPlayer] = useState((player) => { player = props.player; return player });
+    const [player, setPlayer] = useState((pl) => { pl=m_player; return pl });
     const [win, setWin] = useState(false);
     const [number, setNumber] = useState(player.number)
 
@@ -15,8 +15,9 @@ function Player_board(props) {
         array.forEach((item) => {
             total += item;
         });
-        return total / array.length;
+        return Math.floor(total / array.length) ;
     }
+
 
     const updatePlayer = (Number) => {
         let update_player = player;
@@ -32,6 +33,7 @@ function Player_board(props) {
         props.updatePlayers(player);
     }
 
+
     const new_Game = () => {
         setWin(false)
         let update_player = player;
@@ -41,11 +43,15 @@ function Player_board(props) {
         setNumber(player.number)
         props.updatePlayers(update_player);
     }
+
+
     return (
-        <div>
-            <p>Get to 100<br />Gamer: {player.name} <br />Number: {number}<br />Steps: {player.steps}</p>
-            {win ? <p>you did it</p> : null}
+        <div className='player_board' style={props.disabled==false?{boxShadow:' rgb(249 47 96) 0px 0px 4px, rgb(250 144 167) 0px 0px 15px, rgb(250 177 192 / 68%) 0px 0px 35px, rgb(255, 255, 255) 0px 0px 100px'}:null}>
+            <p><h1>GET TO 💯</h1><br />Gamer: {player.name} <br />Number: {number}<br />Steps: {player.steps}</p>
+            {win ? <p className='win'>you did it</p> : null}
+            <div className='buttons'>
             <Buttons player={player} updatePlayer={updatePlayer} disabled={!win && props.disabled} win={win} new_Game={new_Game} Quit={props.Quit} />
+            </div>
             <p>Score: {player.score.length == 0 ? 0 : player.score.map(score => `${score} `)}</p>
         </div>
     )

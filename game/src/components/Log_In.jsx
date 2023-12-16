@@ -15,7 +15,7 @@ function Log_In(props) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [users, setUsers] = useState([])
+   
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -24,14 +24,13 @@ function Log_In(props) {
 
 
     const handleSubmit = (event) => {
+        debugger
         event.preventDefault();
         if (!localStorage.getItem("users")) {
             localStorage.setItem("users", JSON.stringify([]));
         }
-        debugger
         let users = JSON.parse(localStorage.getItem("users"));
-        setUsers(users)
-        let current_player = create_player()
+        let current_player = create_player(users)
         if (current_player != null) {
             props.setPlayers(prevPlayers => [...prevPlayers, current_player])
         }
@@ -41,12 +40,12 @@ function Log_In(props) {
 
 
 
-    const create_player = () => {
+    const create_player = (users) => {
         let user = users.filter(player => player.email == email);
         let current_player = new Player(name, email)
         if (user.length == 0) {
-            setUsers(prevUsers => [...prevUsers, { 'name': name, 'email': email, 'score': [], 'average': 1000 }]);
-            localStorage.setItem("users", JSON.stringify(users));
+            let update_users=[...users, { 'name': name, 'email': email, 'score': [], 'average':1000 }]
+            localStorage.setItem("users", JSON.stringify(update_users));
         }
         else {
             let player = props.players.filter(player => player.email == email);
@@ -72,7 +71,7 @@ function Log_In(props) {
         {props.players.length ? <div>
             <p>the gamers are:</p>
             {props.players.map((player, index) => <p key={index}>{player.name}</p>)}
-            <button onClick={() => props.start_game(users)}>Start Game</button>
+            <button onClick={() => props.start_game()}>Start Game</button>
         </div> : null}
     </>)
 }
