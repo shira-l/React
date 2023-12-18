@@ -19,10 +19,10 @@ function Buttons(props) {
                 number = Math.floor(props.player.number / 2);
                 break;
             case 'New Game':
-                props.new_Game()
+                props.new_Game();
                 break;
             case 'Quit':
-                props.Quit();
+                props.Quit(props.player);
                 break;
         }
         if (number!=null) { props.updatePlayer(number); }
