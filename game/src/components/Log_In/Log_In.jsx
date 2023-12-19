@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import '../Log_In/Log_In.css'
+import React from 'react';
 class Player {
 
     constructor(name, email) {
@@ -62,6 +64,7 @@ function Log_In(props) {
 
 
     return (<>
+        <h1>GET TO 💯</h1>
         <form onSubmit={handleSubmit}>
             <input type="text" name="name" onChange={handleChange} placeholder="name" value={name} required />
             <br />

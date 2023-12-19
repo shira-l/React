@@ -1,0 +1,25 @@
+.player_board {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border: solid 2px #f92f60;
+    background-color: #fae2e4;
+    border-radius: 10px;
+    margin: 20px;
+    width: 280px;
+    height: 350px;
+    padding: 5px;
+  }
+
+  .win {
+    color: #f92f60;
+    font-weight: 500;
+    font-size: 25px;
+    margin-top: 0px;
+  }
+
+  
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+  }

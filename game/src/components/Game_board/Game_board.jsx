@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Player_board from './Player_board'
-import Log_In from './Log_In';
-import '../App.css'
+import Player_board from '../Player_board/Player_board.jsx'
+import Log_In from '../Log_In/Log_In';
+import '../Game_board/Game_board.css'
 import React from 'react';
 
 function Game_board() {
@@ -88,16 +88,16 @@ function Game_board() {
 
     return (
         <>
-
             {Bdisplay ? (<Log_In players={players} setPlayers={setPlayers} start_game={start_game} />)
-                : (<div id='board'> {players.map((player, index) => (
+                : (<><p id='title'>GET TO 💯</p>
+                <div id='board'> {players.map((player, index) => (
                     <Player_board key={index} m_player={player}
                         updatePlayers={updatePlayers} disabled={index !== Iplayer}
                         changePlayers={changePlayers} IPlayer={Iplayer} changeDeletePlayer={changeDeletePlayer}
-                        deletePlayer={deletePlayer} Quit={Quit} 
-                    />))}</div>)}
-            {!Bdisplay ? (<p>The leading gamers: {leadingPlayers.map(player =>
-                `${player.name}: ${player.average} `)}</p>) : null}
+                        deletePlayer={deletePlayer} Quit={Quit}
+                    />))}</div>
+                    <div id='l_gamers'><big>The leading gamers:</big> {leadingPlayers.map((player, index) => (
+                        <p><big>Winner{index + 1}</big>{` | ${player.name}: ${player.average} `}</p>))}</div></>)}
         </>
     )
 };

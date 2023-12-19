@@ -1,0 +1,25 @@
+#title{
+    background-color: #fae2e4;
+    height: 150px;
+    font-size: 85px;
+    font-family: emoji;
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  #l_gamers {
+    background-color: #fae2e4;
+    border-radius: 10px;
+    padding: 18px;
+    width: 250px;
+  }
+
+  #board {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 80px;
+  }
+
+  

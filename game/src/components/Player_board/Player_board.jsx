@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import Buttons from './Buttons'
+import Buttons from '../Buttons/Buttons'
+import '../Player_board/Player_board.css'
 import React from 'react';
+
 
 function Player_board(props) {
     let player  = props.m_player;
@@ -19,7 +21,7 @@ function Player_board(props) {
     const QuitPlayer = () => {
      props.changeDeletePlayer(false)
        setNumber(player.number)
-        
+
     }
 
 
@@ -37,12 +39,14 @@ function Player_board(props) {
 
 
     const new_Game = () => {
-        setWin(false)
         player.number = Math.floor(Math.random() * 99);
         player.steps = 0;
         setNumber(player.number)
         props.updatePlayers(player);
     }
+
+
+
     if (props.deletePlayer&&number==100 ) {
         QuitPlayer()
     }
