@@ -50,7 +50,7 @@ function Keyboard_Button(props) {
                 {
                     getKeyboard().map((letterN) => (
                         <>
-                            {letterN == '\n' ? <br /> : <button
+                            {letterN == '\n' ? <br /> : <button class="kbc-button no-container" 
                                 onClick={() => {
                                     props.setLetter(letterN)
                                 }}

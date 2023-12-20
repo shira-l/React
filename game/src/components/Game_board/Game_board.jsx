@@ -6,7 +6,7 @@ import React from 'react';
 
 function Game_board() {
     const [players, setPlayers] = useState([])
-    const [Bdisplay, setBdisplay] = useState(true)
+    const [LogInDisplay, setLogInDisplay] = useState(true)
     const [Iplayer, setIPlayer] = useState(0);
     const [leadingPlayers, setLeadingPlayers] = useState([])
     const [deletePlayer, setDeletePlayer] = useState(false)
@@ -65,13 +65,13 @@ function Game_board() {
         const update_players = players.filter(Player => Player.email !== player.email);
         setPlayers(update_players);
         setIPlayer((Iplayer) % (players.length - 1));
-        players.length === 1 ? setBdisplay(true) : null;
+        players.length === 1 ? setLogInDisplay(true) : null;
     };
 
 
     const start_game = () => {
         setIPlayer(0)
-        setBdisplay(false)
+        setLogInDisplay(false)
         leading_update()
     }
 
@@ -88,7 +88,7 @@ function Game_board() {
 
     return (
         <>
-            {Bdisplay ? (<Log_In players={players} setPlayers={setPlayers} start_game={start_game} />)
+            {LogInDisplay ? (<Log_In players={players} setPlayers={setPlayers} start_game={start_game} />)
                 : (<><p id='title'>GET TO 💯</p>
                 <div id='board'> {players.map((player, index) => (
                     <Player_board key={index} m_player={player}
