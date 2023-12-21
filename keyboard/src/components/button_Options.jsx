@@ -13,10 +13,13 @@ function Button_Options(props) {
 
     return (
         <>
-            <div>{lettersArray.map((name) => <button onClick={() => { props.setPerformence(prevPerformence => [...prevPerformence, () => { props.setlanguage(props.language) }]);
-            props.language==='CAPS-LOCK'&&name==='CAPS-LOCK'?props.setlanguage( 'english') :props.setlanguage(name) }}>{name}</button>)}</div>
-            <div>{changeAll.map((name, index) => <button onClick={() => { props.change_all[0](); props.change_all[index+1]() }}>{name}</button>)}
-                <button onClick={() => undo()}>UNDO</button>
+            <div>{lettersArray.map((name) => <button class="kbc-button no-container kbc-button-info" onClick={() => {
+                props.setPerformence(prevPerformence => [...prevPerformence, () => { props.setlanguage(props.language) }]);
+                props.language === 'CAPS-LOCK' && name === 'CAPS-LOCK' ? props.setlanguage('english') : props.setlanguage(name)
+            }}>{name}</button>)}</div>
+            <div>{changeAll.map((name, index) => <button class="kbc-button no-container kbc-button-secondary" 
+            onClick={() => { props.change_all[0](); props.change_all[index + 1]() }}>{name}</button>)}
+                <button class="kbc-button no-container kbc-button-secondary" onClick={() => undo()}>UNDO</button>
             </div>
         </>
     )

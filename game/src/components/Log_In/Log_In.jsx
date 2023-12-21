@@ -18,7 +18,7 @@ function Log_In(props) {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-   
+   const {players,setPlayers,start_game}=props
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -27,7 +27,6 @@ function Log_In(props) {
 
 
     const handleSubmit = (event) => {
-        debugger
         event.preventDefault();
         if (!localStorage.getItem("users")) {
             localStorage.setItem("users", JSON.stringify([]));
@@ -35,7 +34,7 @@ function Log_In(props) {
         let users = JSON.parse(localStorage.getItem("users"));
         let current_player = create_player(users)
         if (current_player != null) {
-            props.setPlayers(prevPlayers => [...prevPlayers, current_player])
+            setPlayers(prevPlayers => [...prevPlayers, current_player])
         }
         setName('')
         setEmail('')
@@ -51,7 +50,7 @@ function Log_In(props) {
             localStorage.setItem("users", JSON.stringify(update_users));
         }
         else {
-            let player = props.players.filter(player => player.email == email);
+            let player = players.filter(player => player.email == email);
             if (player.length !== 0) {
                 alert("this gamer already exist")
                 return null
@@ -72,10 +71,10 @@ function Log_In(props) {
             <br />
             <button type="submit">Add Gamer</button>
         </form>
-        {props.players.length ? <div>
+        {players.length ? <div>
             <p>the gamers are:</p>
-            {props.players.map((player, index) => <p key={index}>{player.name}</p>)}
-            <button onClick={() => props.start_game()}>Start Game</button>
+            {players.map((player, index) => <p key={index}>{player.name}</p>)}
+            <button onClick={() =>start_game()}>Start Game</button>
         </div> : null}
     </>)
 }

@@ -61,7 +61,7 @@ function Keyboard_Button(props) {
                     ))}
             </div>
             <div>
-                {buttons.map((name) => <button onClick={() => buttonsFun(name)}>{name}</button>)}
+                {buttons.map((name) => <button class="kbc-button no-container kbc-button-light"onClick={() => buttonsFun(name)}>{name}</button>)}
             </div>
         </>
     );

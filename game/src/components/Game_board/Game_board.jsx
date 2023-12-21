@@ -7,7 +7,7 @@ import React from 'react';
 function Game_board() {
     const [players, setPlayers] = useState([])
     const [LogInDisplay, setLogInDisplay] = useState(true)
-    const [Iplayer, setIPlayer] = useState(0);
+    const [IndexPlayer, setIndexPlayer] = useState(0);
     const [leadingPlayers, setLeadingPlayers] = useState([])
     const [deletePlayer, setDeletePlayer] = useState(false)
 
@@ -20,7 +20,7 @@ function Game_board() {
             }
             return Player
         })
-        if (update_player.number != 100) { setIPlayer((Iplayer + 1) % (players.length)) }
+        if (update_player.number != 100) { setIndexPlayer((IndexPlayer + 1) % (players.length)) }
         else {
             update_storage(update_player)
         }
@@ -60,17 +60,16 @@ function Game_board() {
 
 
     const Quit = (player) => {
-        if (Iplayer < players.length - 1) { setDeletePlayer(true) }
-        debugger
+        if (IndexPlayer < players.length - 1) { setDeletePlayer(true) }
         const update_players = players.filter(Player => Player.email !== player.email);
         setPlayers(update_players);
-        setIPlayer((Iplayer) % (players.length - 1));
+        setIndexPlayer((IndexPlayer) % (players.length - 1));
         players.length === 1 ? setLogInDisplay(true) : null;
     };
 
 
     const start_game = () => {
-        setIPlayer(0)
+        setIndexPlayer(0)
         setLogInDisplay(false)
         leading_update()
     }
@@ -80,10 +79,6 @@ function Game_board() {
         setDeletePlayer(delete_player)
     }
 
-    const changePlayers = (players) => {
-        setPlayers(players)
-    }
-
 
 
     return (
@@ -91,9 +86,9 @@ function Game_board() {
             {LogInDisplay ? (<Log_In players={players} setPlayers={setPlayers} start_game={start_game} />)
                 : (<><p id='title'>GET TO 💯</p>
                 <div id='board'> {players.map((player, index) => (
-                    <Player_board key={index} m_player={player}
-                        updatePlayers={updatePlayers} disabled={index !== Iplayer}
-                        changePlayers={changePlayers} IPlayer={Iplayer} changeDeletePlayer={changeDeletePlayer}
+                    <Player_board key={index} player={player}
+                        updatePlayers={updatePlayers} disabled={index !== IndexPlayer}
+                        changeDeletePlayer={changeDeletePlayer}
                         deletePlayer={deletePlayer} Quit={Quit}
                     />))}</div>
                     <div id='l_gamers'><big>The leading gamers:</big> {leadingPlayers.map((player, index) => (
